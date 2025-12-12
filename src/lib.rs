@@ -1,11 +1,13 @@
 use std::{fs::File, io::Write, collections::HashMap};
 use csv::Reader;
-use colored::*;
 use regex::Regex;
+use chrono::NaiveDate;
 
 // Toolbox
 use file_reader::*;
-use dlog::{*, enums::OutputTarget};
+
+mod prelude;
+use crate::prelude::*;
 
 // Fick files
 mod filter_parser;
@@ -16,7 +18,7 @@ const FILTER_PATH: &str = "config\\config.toml";
 pub struct FickCLI {
     pub log: Logger,
     file_reader: FileReader,
-    records: HashMap<String, Vec<Record>>, // Each Vec<Record> is one CSV file
+    records: Vec<Record>, // Each Vec<Record> is one CSV file
 }
 
 #[derive(Debug)]
@@ -32,7 +34,7 @@ impl FickCLI {
         let log = Logger::init("fick", None, OutputTarget::Terminal).unwrap();
         let file_reader = FileReader::new("Terminal");
 
-        FickCLI { log, file_reader, records: HashMap::new() }
+        FickCLI { log, file_reader, records: Vec::new() }
     }
 
     pub fn read_csv(&mut self, file_path: &String, query: &Option<String>, options: &Option<String>) -> Result<(), Box<dyn std::error::Error>> {
@@ -43,7 +45,6 @@ impl FickCLI {
             |log| log.info("Reader successful!")
         )?;
 
-        let mut all_info: Vec<Record> = Vec::new();
         self.log.info("Placing info into Vector");
 
         for result in contents.records() {
@@ -56,159 +57,182 @@ impl FickCLI {
                 money_out: fields[2].to_string(),
                 money_in: fields[3].to_string(),
             };
-            all_info.push(current_line);
+            self.records.push(current_line);
         }
         self.log.info("All info recorded!");
 
+        let mut default_option = "complete";
+
+        match options.as_deref() {
+            Some(option) => {
+                default_option = option;
+            },
+            _ => self.log.info("Didn't pick an option! Defaulting to complete!")
+        }
+
         // TODO: Add in functions of what we want to do. By date, by transaction, by amount
+        match query.as_deref() {
+            Some("total earned") => self.calc_amount_earned(default_option),
+            _ => self.log.info("Didn't pick a query!"),
+        }
 
         Ok(())
     }
 
-    fn calc_amount_earned(&mut self, label: &str) {
-        let contents = match self.records.get(label) {
-            Some(c) => c,
-            None => {
-                self.log.error("Missing Records!");
-                return;
+    fn calc_amount_earned(&mut self, options: &str) {
+        self.log.info("Calculating totals!");
+
+        let date_range_re = Regex::new(r"^(\d{4}-\d{2}-\d{2}) (\d{4}-\d{2}-\d{2})$").unwrap();
+
+        let (start_date, end_date) = match options {
+            "complete" => {
+                self.log.info("Ignoring filters. Going for complete data.");
+                (None, None)
+            },
+            opt if date_range_re.is_match(opt) => {
+                let caps = date_range_re.captures(opt).unwrap();
+                let start = NaiveDate::parse_from_str(&caps[1], "%Y-%m-%d").ok();
+                let end = NaiveDate::parse_from_str(&caps[2], "%Y-%m-%d").ok();
+                self.log.info("Setting date range.");
+                (start, end)
+            }
+            _ => {
+                self.log.info("Invalid date range formate. Ignoring filters. Going for complete data.");
+                (None, None)
             }
         };
+
         let mut total_earned: f64 = 0.0;
-        let re_transfer = Regex::new(r"Internet Banking INTERNET TRANSFER (\d+)").unwrap();
+        let ignore_info = Regex::new(r"Internet Banking INTERNET TRANSFER \d+").unwrap();
 
-        for transaction in contents.iter() {
-            let money_in: f64 = transaction.money_in.parse().unwrap_or(0.0);
-            if money_in > 0.0 && !re_transfer.is_match(&transaction.info) {
-                let info_str = transaction.info.clone();
-                let date_str = transaction.date.as_str();
+        for record in &self.records {
 
-                total_earned += money_in;
-                let total_rounded = (total_earned * 100.0).round() / 100.0;
-                
-                println!("[{}] Earned {} on {}.\n",
-                        date_str,
-                        money_in.to_string().red(), 
-                        info_str.green(), 
-                );
-                total_earned = total_rounded;
+
+            if !ignore_info.is_match(&record.info) {
+                total_earned += match record.money_in.parse::<f64>() {
+                    Ok(value) => {
+                        self.log.info(format!("{}", record.date));
+                        (value * 100.00).round() / 100.0
+                    },
+                    Err(_) => 0.0,
+                };
             }
         }
-
-        println!("Total earned: {}", total_earned);
+        self.log.info(format!("Total Earned: {}", (total_earned *  100.0).round() / 100.0));
     }
+ 
+    // fn calc_amount_spent(&mut self, label: &str, filter: &Option<String>) {
 
-    fn calc_amount_spent(&mut self, label: &str, filter: &Option<String>) {
+    //     // Start total_spent with 0.0 for tracking
+    //     let mut total_spent: f64 = 0.0;
+    //     let contents = match self.records.get(label) {
+    //         Some(c) => c,
+    //         None => {
+    //             self.log.error("Missing Records!");
+    //             return;
+    //         }
+    //     };
 
-        // Start total_spent with 0.0 for tracking
-        let mut total_spent: f64 = 0.0;
-        let contents = match self.records.get(label) {
-            Some(c) => c,
-            None => {
-                self.log.error("Missing Records!");
-                return;
-            }
-        };
+    //     // Set variables for logging info to designated file.
+    //     let f: String = filter.clone().unwrap_or("None".to_string());
+    //     let file_path = format!("C:\\Users\\memph\\Documents\\{}_info.txt", f);
+    //     let mut file = File::create(file_path).unwrap();
 
-        // Set variables for logging info to designated file.
-        let f: String = filter.clone().unwrap_or("None".to_string());
-        let file_path = format!("C:\\Users\\memph\\Documents\\{}_info.txt", f);
-        let mut file = File::create(file_path).unwrap();
+    //     // If using a filter, what will it show?
+    //     let filter_contents = self.file_reader.file_type(FILTER_PATH);
 
-        // If using a filter, what will it show?
-        let filter_contents = self.file_reader.file_type(FILTER_PATH);
+    //     let toml_str = match filter_contents {
+    //         Ok(FileContent::Text(s)) => s,
+    //         Ok(FileContent::Lines(_)) => {
+    //             eprintln!("Expected FileContent::Text for TOML config, using empty config.");
+    //             String::new()
+    //         }
+    //         Err(e) => {
+    //             eprintln!("Error reading config: {e}, using empty config.");
+    //             String::new()
+    //         }
+    //     };
 
-        let toml_str = match filter_contents {
-            Ok(FileContent::Text(s)) => s,
-            Ok(FileContent::Lines(_)) => {
-                eprintln!("Expected FileContent::Text for TOML config, using empty config.");
-                String::new()
-            }
-            Err(e) => {
-                eprintln!("Error reading config: {e}, using empty config.");
-                String::new()
-            }
-        };
+    //     let filters = filter_parser::load_filters(&toml_str, &mut self.log).unwrap_or_default();
 
-        let filters = filter_parser::load_filters(&toml_str, &mut self.log).unwrap_or_default();
+    //     // If you don't choose a filter it defaults to this
+    //     let default_regex: Vec<Regex> = filters.iter()
+    //         .flat_map(|(_, regexes, _)| regexes.iter().cloned())
+    //         .collect();
+    //     self.log.info("Defaults loaded!");
 
-        // If you don't choose a filter it defaults to this
-        let default_regex: Vec<Regex> = filters.iter()
-            .flat_map(|(_, regexes, _)| regexes.iter().cloned())
-            .collect();
-        self.log.info("Defaults loaded!");
+    //     // Removes this text from strings to clean things up a bit
+    //     let remove = [
+    //         Regex::new(r"Point of Sale - Interac RETAIL PURCHASE (\d+) ").unwrap()
+    //     ];
+    //     self.log.info("Set regex to remove!");
 
-        // Removes this text from strings to clean things up a bit
-        let remove = [
-            Regex::new(r"Point of Sale - Interac RETAIL PURCHASE (\d+) ").unwrap()
-        ];
-        self.log.info("Set regex to remove!");
+    //     // Iterate over the filters list. If you find one that matches f then map the logic to regex and filter_on_match if not use the default filters
+    //     let (regex, filter_on_match) = filters
+    //         .iter()
+    //         .find(|(name, _, _)| *name== f)
+    //         .map(|(_, regex, logic)| (regex, *logic))
+    //         .unwrap_or_else(|| (&default_regex, false)
+    //     );
+    //     self.log.info("Full Regex patterns loaded!");
 
-        // Iterate over the filters list. If you find one that matches f then map the logic to regex and filter_on_match if not use the default filters
-        let (regex, filter_on_match) = filters
-            .iter()
-            .find(|(name, _, _)| *name== f)
-            .map(|(_, regex, logic)| (regex, *logic))
-            .unwrap_or_else(|| (&default_regex, false)
-        );
-        self.log.info("Full Regex patterns loaded!");
+    //     // Iterate over the file given
+    //     for transactions in contents.iter(){
+    //         let money_out_str: f64 = transactions.money_out.parse().unwrap_or(0.0);
 
-        // Iterate over the file given
-        for transactions in contents.iter(){
-            let money_out_str: f64 = transactions.money_out.parse().unwrap_or(0.0);
+    //         // Use the regex grabbed before from default or the filter and match any string with any regex listed.
+    //         let is_match = regex.iter().any(|re| re.is_match(&transactions.info));
 
-            // Use the regex grabbed before from default or the filter and match any string with any regex listed.
-            let is_match = regex.iter().any(|re| re.is_match(&transactions.info));
+    //         // If you found the filter category, and the bool is true or its set to false. And this is a money_out string.
+    //         if ((is_match && filter_on_match) || (!is_match && !filter_on_match)) && money_out_str > 0.0 {
 
-            // If you found the filter category, and the bool is true or its set to false. And this is a money_out string.
-            if ((is_match && filter_on_match) || (!is_match && !filter_on_match)) && money_out_str > 0.0 {
+    //             let mut info_str = transactions.info.clone();
+    //             let date_str = transactions.date.as_str();
 
-                let mut info_str = transactions.info.clone();
-                let date_str = transactions.date.as_str();
+    //             total_spent += money_out_str;
+    //             let total_rounded = (total_spent * 100.0).round() / 100.0;
 
-                total_spent += money_out_str;
-                let total_rounded = (total_spent * 100.0).round() / 100.0;
+    //             for rm in remove.iter() {
+    //                 info_str = rm.replace_all(&info_str, "").to_string();
+    //             }
 
-                for rm in remove.iter() {
-                    info_str = rm.replace_all(&info_str, "").to_string();
-                }
+    //             let _ = writeln!(file, "[{}] Spent {} on {}. Adding it to the total: {}\n",
+    //                     date_str,
+    //                     money_out_str, 
+    //                     info_str, 
+    //                     total_rounded
+    //             );
 
-                let _ = writeln!(file, "[{}] Spent {} on {}. Adding it to the total: {}\n",
-                        date_str,
-                        money_out_str, 
-                        info_str, 
-                        total_rounded
-                );
+    //             total_spent = total_rounded;
+    //         }
+    //     }
 
-                total_spent = total_rounded;
-            }
-        }
+    //     // If successful write collected total to end of file.
+    //     let _ = writeln!(file, "Total spent: {}", total_spent);
+    // }
 
-        // If successful write collected total to end of file.
-        let _ = writeln!(file, "Total spent: {}", total_spent);
-    }
+    // fn sort_csv_by_date(&mut self, label: &str) {
+    //     let contents = match self.records.get(label) {
+    //         Some(c) => c,
+    //         None => {
+    //             self.log.error("Missing Records!");
+    //             return;
+    //         }
+    //     };
 
-    fn sort_csv_by_date(&mut self, label: &str) {
-        let contents = match self.records.get(label) {
-            Some(c) => c,
-            None => {
-                self.log.error("Missing Records!");
-                return;
-            }
-        };
+    //     let mut dates: HashMap<String, Vec<(&str, &str, &str)>> = HashMap::new();
+    //     for transactions in contents.iter() {
 
-        let mut dates: HashMap<String, Vec<(&str, &str, &str)>> = HashMap::new();
-        for transactions in contents.iter() {
+    //         let info_str = transactions.info.as_str();
+    //         let money_out_str = transactions.money_out.as_str();
+    //         let money_in_str = transactions.money_in.as_str();
 
-            let info_str = transactions.info.as_str();
-            let money_out_str = transactions.money_out.as_str();
-            let money_in_str = transactions.money_in.as_str();
+    //         dates.entry(transactions.date.clone())
+    //             .or_insert(Vec::new())
+    //             .push((info_str, money_out_str, money_in_str));
+    //     }
 
-            dates.entry(transactions.date.clone())
-                .or_insert(Vec::new())
-                .push((info_str, money_out_str, money_in_str));
-        }
-
-        //println!("{:#?}", dates);
-    }
+    //     //println!("{:#?}", dates);
+    // }
 
 }
