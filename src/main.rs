@@ -17,10 +17,12 @@ struct Args {
     file_path: String,
 
     // Optional
-    query: Option<String>,
+    #[clap()]
+    query: String,
 
     // Secondary Options
-    options: Option<String>
+    #[clap()]
+    options: Vec<String>
 
 }
 

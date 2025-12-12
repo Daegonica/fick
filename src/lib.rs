@@ -1,8 +1,7 @@
 mod calc_incoming;
 mod prelude;
 
-use std::{fs::File, io::Write, collections::HashMap};
-use csv::Reader;
+use std::{fs::File, io::Write};
 
 // Toolbox
 use file_reader::*;
@@ -33,7 +32,7 @@ impl FickCLI {
         FickCLI { log, file_reader, records: Vec::new() }
     }
 
-    pub fn read_csv(&mut self, file_path: &String, query: &Option<String>, options: &Option<String>) -> Result<(), Box<dyn std::error::Error>> {
+    pub fn read_csv(&mut self, file_path: &String, query: &String, options: &Vec<String>) -> Result<(), Box<dyn std::error::Error>> {
         
         self.log.info(&format!("Reading from: {}", file_path));
         let v_contents = self.file_reader.file_type(file_path);
@@ -52,18 +51,16 @@ impl FickCLI {
         }
         self.log.info("All info recorded!");
 
-        let mut default_option = "complete";
-
-        match options.as_deref() {
-            Some(option) => {
-                default_option = option;
-            },
-            _ => self.log.info("Didn't pick an option! Defaulting to complete!")
+        let mut default_option: Vec<String> = Vec::new();
+        if options.is_empty() {
+            default_option.push("complete".to_string());
+        } else {
+            default_option = options.clone()
         }
 
         // TODO: Add in functions of what we want to do. By date, by transaction, by amount
-        match query.as_deref() {
-            Some("total earned") => calc_incoming::calc_amount_earned(&mut self.log, &self.records, default_option),
+        match query.as_str() {
+            "total earned" => calc_incoming::calc_amount_earned(&mut self.log, &self.records, &default_option),
             _ => self.log.info("Didn't pick a query!"),
         }
 
