@@ -1,0 +1,24 @@
+[[2025-11-29 07:36:29]] [[1;91mDaegonica Software[0m] <INFO> [[4;33mfile_reader[0m] - [3mWorking Directory: Ok("F:\\Development\\projects\\fick")[0m
+[[2025-11-29 07:36:29]] [[1;91mDaegonica Software[0m] <INFO> [[4;33mfile_reader[0m] - [3mTOML file detected! Loading information![0m
+[[2025-11-29 07:36:29]] [[1;91mDaegonica Software[0m] <INFO> [[4;33mfile_reader[0m] - [3mOpening TOML![0m
+[[2025-11-29 07:42:11]] [[1;91mDaegonica Software[0m] <INFO> [[4;33mfile_reader[0m] - [3mWorking Directory: Ok("F:\\Development\\projects\\fick")[0m
+[[2025-11-29 07:42:11]] [[1;91mDaegonica Software[0m] <INFO> [[4;33mfile_reader[0m] - [3mTOML file detected! Loading information![0m
+[[2025-11-29 07:42:11]] [[1;91mDaegonica Software[0m] <INFO> [[4;33mfile_reader[0m] - [3mOpening TOML![0m
+[[2025-11-29 07:43:48]] [[1;91mDaegonica Software[0m] <INFO> [[4;33mfile_reader[0m] - [3mWorking Directory: Ok("F:\\Development\\projects\\fick")[0m
+[[2025-11-29 07:43:48]] [[1;91mDaegonica Software[0m] <INFO> [[4;33mfile_reader[0m] - [3mTOML file detected! Loading information![0m
+[[2025-11-29 07:43:48]] [[1;91mDaegonica Software[0m] <INFO> [[4;33mfile_reader[0m] - [3mOpening TOML![0m
+[[2025-11-29 07:50:48]] [[1;91mDaegonica Software[0m] <INFO> [[4;33mfile_reader[0m] - [3mWorking Directory: Ok("F:\\Development\\projects\\fick")[0m
+[[2025-11-29 07:50:48]] [[1;91mDaegonica Software[0m] <INFO> [[4;33mfile_reader[0m] - [3mTOML file detected! Loading information![0m
+[[2025-11-29 07:50:48]] [[1;91mDaegonica Software[0m] <INFO> [[4;33mfile_reader[0m] - [3mOpening TOML![0m
+[[2025-11-29 08:11:24]] [Daegonica Software] <INFO> [file_reader] - Working Directory: Ok("F:\\Development\\projects\\fick")
+[[2025-11-29 08:11:24]] [Daegonica Software] <INFO> [file_reader] - TOML file detected! Loading information!
+[[2025-11-29 08:11:24]] [Daegonica Software] <INFO> [file_reader] - Opening TOML!
+[[2025-11-29 08:21:14]] [Daegonica Software] <INFO> [file_reader] - Working Directory: Ok("F:\\Development\\projects\\fick")
+[[2025-11-29 08:21:14]] [Daegonica Software] <INFO> [file_reader] - TOML file detected! Loading information!
+[[2025-11-29 08:21:14]] [Daegonica Software] <INFO> [file_reader] - Opening TOML!
+[[2025-11-29 08:22:25]] [Daegonica Software] <INFO> [file_reader] - Working Directory: Ok("F:\\Development\\projects\\fick")
+[[2025-11-29 08:22:25]] [Daegonica Software] <INFO> [file_reader] - TOML file detected! Loading information!
+[[2025-11-29 08:22:25]] [Daegonica Software] <INFO> [file_reader] - Opening TOML!
+[[2025-11-29 08:23:24]] [Daegonica Software] <INFO> [file_reader] - Working Directory: Ok("F:\\Development\\projects\\fick")
+[[2025-11-29 08:23:24]] [Daegonica Software] <INFO> [file_reader] - TOML file detected! Loading information!
+[[2025-11-29 08:23:24]] [Daegonica Software] <INFO> [file_reader] - Opening TOML!

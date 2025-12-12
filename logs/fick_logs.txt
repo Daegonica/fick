@@ -1,0 +1,214 @@
+[[2025-11-29 07:36:29]] [[1;91mDaegonica Software[0m] <INFO> [[4;33mfick[0m] - [3mReading from: records\cibc.csv[0m
+[[2025-11-29 07:36:29]] [[1;91mDaegonica Software[0m] <INFO> [[4;33mfick[0m] - [3mReader successful![0m
+[[2025-11-29 07:42:11]] [[1;91mDaegonica Software[0m] <INFO> [[4;33mfick[0m] - [3mReading from: records\cibc.csv[0m
+[[2025-11-29 07:42:11]] [[1;91mDaegonica Software[0m] <INFO> [[4;33mfick[0m] - [3mReader successful![0m
+[[2025-11-29 07:42:11]] [[1;91mDaegonica Software[0m] <INFO> [[4;33mfick[0m] - [3mRaw TOML: [[filters]]
+category = "gas stations"
+patterns = [
+    "HOOTER'S TEMPO",
+    "BOYLE GAS BAR",
+    "BOYLE PAY",
+    "PETRO-CANADA 39",
+    "GOLD HAPPYS"
+]
+filter_on_match = true
+
+[[filters]]
+category = "subs"
+patterns = [
+    "Amazon Channels",
+    "AMAZON",
+    "DISNEY PLUS",
+    "NETFLIX.COM",
+    "MICROSOFT*TRIAL",
+    "Spotify",
+    "Audible"
+]
+filter_on_match = true
+[0m
+[[2025-11-29 07:42:11]] [[1;91mDaegonica Software[0m] <INFO> [[4;33mfick[0m] - [3mParsed filters: FiltersFile { filters: [FilterConfig { category: "gas stations", patterns: ["HOOTER'S TEMPO", "BOYLE GAS BAR", "BOYLE PAY", "PETRO-CANADA 39", "GOLD HAPPYS"], filter_on_match: true }, FilterConfig { category: "subs", patterns: ["Amazon Channels", "AMAZON", "DISNEY PLUS", "NETFLIX.COM", "MICROSOFT*TRIAL", "Spotify", "Audible"], filter_on_match: true }] }[0m
+[[2025-11-29 07:42:11]] [[1;91mDaegonica Software[0m] <INFO> [[4;33mfick[0m] - [3mCat: gas stations, Reg: [Regex("HOOTER'S TEMPO"), Regex("BOYLE GAS BAR"), Regex("BOYLE PAY"), Regex("PETRO-CANADA 39"), Regex("GOLD HAPPYS")][0m
+[[2025-11-29 07:42:11]] [[1;91mDaegonica Software[0m] <INFO> [[4;33mfick[0m] - [3mCat: subs, Reg: [Regex("Amazon Channels"), Regex("AMAZON"), Regex("DISNEY PLUS"), Regex("NETFLIX.COM"), Regex("MICROSOFT*TRIAL"), Regex("Spotify"), Regex("Audible")][0m
+[[2025-11-29 07:43:48]] [[1;91mDaegonica Software[0m] <INFO> [[4;33mfick[0m] - [3mReading from: records\cibc.csv[0m
+[[2025-11-29 07:43:48]] [[1;91mDaegonica Software[0m] <INFO> [[4;33mfick[0m] - [3mReader successful![0m
+[[2025-11-29 07:43:48]] [[1;91mDaegonica Software[0m] <INFO> [[4;33mfick[0m] - [3mRaw TOML: [[filters]]
+category = "gas stations"
+patterns = [
+    "HOOTER'S TEMPO",
+    "BOYLE GAS BAR",
+    "BOYLE PAY",
+    "PETRO-CANADA 39",
+    "GOLD HAPPYS"
+]
+filter_on_match = true
+
+[[filters]]
+category = "subs"
+patterns = [
+    "Amazon Channels",
+    "AMAZON",
+    "DISNEY PLUS",
+    "NETFLIX.COM",
+    "MICROSOFT*TRIAL",
+    "Spotify",
+    "Audible"
+]
+filter_on_match = true
+[0m
+[[2025-11-29 07:43:48]] [[1;91mDaegonica Software[0m] <INFO> [[4;33mfick[0m] - [3mParsed filters: FiltersFile { filters: [FilterConfig { category: "gas stations", patterns: ["HOOTER'S TEMPO", "BOYLE GAS BAR", "BOYLE PAY", "PETRO-CANADA 39", "GOLD HAPPYS"], filter_on_match: true }, FilterConfig { category: "subs", patterns: ["Amazon Channels", "AMAZON", "DISNEY PLUS", "NETFLIX.COM", "MICROSOFT*TRIAL", "Spotify", "Audible"], filter_on_match: true }] }[0m
+[[2025-11-29 07:43:48]] [[1;91mDaegonica Software[0m] <INFO> [[4;33mfick[0m] - [3mCat: gas stations, Reg: [Regex("HOOTER'S TEMPO"), Regex("BOYLE GAS BAR"), Regex("BOYLE PAY"), Regex("PETRO-CANADA 39"), Regex("GOLD HAPPYS")][0m
+[[2025-11-29 07:43:48]] [[1;91mDaegonica Software[0m] <INFO> [[4;33mfick[0m] - [3mCat: subs, Reg: [Regex("Amazon Channels"), Regex("AMAZON"), Regex("DISNEY PLUS"), Regex("NETFLIX.COM"), Regex("MICROSOFT*TRIAL"), Regex("Spotify"), Regex("Audible")][0m
+[[2025-11-29 07:50:48]] [[1;91mDaegonica Software[0m] <INFO> [[4;33mfick[0m] - [3mReading from: records\cibc.csv[0m
+[[2025-11-29 07:50:48]] [[1;91mDaegonica Software[0m] <INFO> [[4;33mfick[0m] - [3mReader successful![0m
+[[2025-11-29 07:50:48]] [[1;91mDaegonica Software[0m] <INFO> [[4;33mfick[0m] - [3mRaw TOML: [[filters]]
+category = "gas stations"
+patterns = [
+    "HOOTER'S TEMPO",
+    "BOYLE GAS BAR",
+    "BOYLE PAY",
+    "PETRO-CANADA 39",
+    "GOLD HAPPYS"
+]
+filter_on_match = true
+
+[[filters]]
+category = "subs"
+patterns = [
+    "Amazon Channels",
+    "AMAZON",
+    "DISNEY PLUS",
+    "NETFLIX.COM",
+    "MICROSOFT*TRIAL",
+    "Spotify",
+    "Audible"
+]
+filter_on_match = true
+[0m
+[[2025-11-29 07:50:48]] [[1;91mDaegonica Software[0m] <INFO> [[4;33mfick[0m] - [3mParsed filters: FiltersFile { filters: [FilterConfig { category: "gas stations", patterns: ["HOOTER'S TEMPO", "BOYLE GAS BAR", "BOYLE PAY", "PETRO-CANADA 39", "GOLD HAPPYS"], filter_on_match: true }, FilterConfig { category: "subs", patterns: ["Amazon Channels", "AMAZON", "DISNEY PLUS", "NETFLIX.COM", "MICROSOFT*TRIAL", "Spotify", "Audible"], filter_on_match: true }] }[0m
+[[2025-11-29 07:50:48]] [[1;91mDaegonica Software[0m] <INFO> [[4;33mfick[0m] - [3mCat: gas stations, Reg: [Regex("HOOTER'S TEMPO"), Regex("BOYLE GAS BAR"), Regex("BOYLE PAY"), Regex("PETRO-CANADA 39"), Regex("GOLD HAPPYS")][0m
+[[2025-11-29 07:50:48]] [[1;91mDaegonica Software[0m] <INFO> [[4;33mfick[0m] - [3mCat: subs, Reg: [Regex("Amazon Channels"), Regex("AMAZON"), Regex("DISNEY PLUS"), Regex("NETFLIX.COM"), Regex("MICROSOFT*TRIAL"), Regex("Spotify"), Regex("Audible")][0m
+[[2025-11-29 08:11:24]] [Daegonica Software] <INFO> [fick] - Reading from: records\cibc.csv
+[[2025-11-29 08:11:24]] [Daegonica Software] <INFO> [fick] - Reader successful!
+[[2025-11-29 08:11:24]] [Daegonica Software] <INFO> [fick] - Raw TOML: [[filters]]
+category = "gas stations"
+patterns = [
+    "HOOTER'S TEMPO",
+    "BOYLE GAS BAR",
+    "BOYLE PAY",
+    "PETRO-CANADA 39",
+    "GOLD HAPPYS"
+]
+filter_on_match = true
+
+[[filters]]
+category = "subs"
+patterns = [
+    "Amazon Channels",
+    "AMAZON",
+    "DISNEY PLUS",
+    "NETFLIX.COM",
+    "MICROSOFT*TRIAL",
+    "Spotify",
+    "Audible"
+]
+filter_on_match = true
+
+[[2025-11-29 08:11:24]] [Daegonica Software] <INFO> [fick] - Parsed filters: FiltersFile { filters: [FilterConfig { category: "gas stations", patterns: ["HOOTER'S TEMPO", "BOYLE GAS BAR", "BOYLE PAY", "PETRO-CANADA 39", "GOLD HAPPYS"], filter_on_match: true }, FilterConfig { category: "subs", patterns: ["Amazon Channels", "AMAZON", "DISNEY PLUS", "NETFLIX.COM", "MICROSOFT*TRIAL", "Spotify", "Audible"], filter_on_match: true }] }
+[[2025-11-29 08:11:24]] [Daegonica Software] <INFO> [fick] - Cat: gas stations, Reg: [Regex("HOOTER'S TEMPO"), Regex("BOYLE GAS BAR"), Regex("BOYLE PAY"), Regex("PETRO-CANADA 39"), Regex("GOLD HAPPYS")]
+[[2025-11-29 08:11:24]] [Daegonica Software] <INFO> [fick] - Cat: subs, Reg: [Regex("Amazon Channels"), Regex("AMAZON"), Regex("DISNEY PLUS"), Regex("NETFLIX.COM"), Regex("MICROSOFT*TRIAL"), Regex("Spotify"), Regex("Audible")]
+[[2025-11-29 08:21:14]] [Daegonica Software] <INFO> [fick] - Reading from: records\cibc.csv
+[[2025-11-29 08:21:14]] [Daegonica Software] <INFO> [fick] - Reader successful!
+[[2025-11-29 08:21:14]] [Daegonica Software] <INFO> [fick] - Raw TOML: [[filters]]
+category = "aetolia"
+patterns = [
+    "IRON REALMS"
+]
+filter_on_match = true
+
+[[filters]]
+category = "online"
+patterns = [
+    "Visa Debit"
+]
+filter_on_match = true
+
+[[filters]]
+category = "weed"
+patterns = [
+    "Earth to Embers",
+    "EARTH TO EMBERS"
+]
+filter_on_match = true
+
+[[filters]]
+category = "groceries"
+patterns = [
+    "BOYLE GROCERY"
+]
+filter_on_match = true
+
+[[filters]]
+category = "bills"
+patterns = [
+    "MCSNET",
+    "KUBRA/EPCOR",
+    "EPCOR",
+    "APEXUTIL",
+    "Internet Banking E-TRANSFER (\\d+) Bruce Clark"
+]
+filter_on_match = true
+
+[[filters]]
+category = "extras"
+patterns = [
+    "Internet Banking INTERNET TRANSFER (\\d+)"
+]
+filter_on_match = true
+[[filters]]
+category = "gas stations"
+patterns = [
+    "HOOTER'S TEMPO",
+    "BOYLE GAS BAR",
+    "BOYLE PAY",
+    "PETRO-CANADA 39",
+    "GOLD HAPPYS"
+]
+filter_on_match = true
+
+[[filters]]
+category = "subs"
+patterns = [
+    "Amazon Channels",
+    "AMAZON",
+    "DISNEY PLUS",
+    "NETFLIX.COM",
+    "MICROSOFT*TRIAL",
+    "Spotify",
+    "Audible"
+]
+filter_on_match = true
+
+[[2025-11-29 08:21:14]] [Daegonica Software] <INFO> [fick] - Parsed filters: FiltersFile { filters: [FilterConfig { category: "aetolia", patterns: ["IRON REALMS"], filter_on_match: true }, FilterConfig { category: "online", patterns: ["Visa Debit"], filter_on_match: true }, FilterConfig { category: "weed", patterns: ["Earth to Embers", "EARTH TO EMBERS"], filter_on_match: true }, FilterConfig { category: "groceries", patterns: ["BOYLE GROCERY"], filter_on_match: true }, FilterConfig { category: "bills", patterns: ["MCSNET", "KUBRA/EPCOR", "EPCOR", "APEXUTIL", "Internet Banking E-TRANSFER (\\d+) Bruce Clark"], filter_on_match: true }, FilterConfig { category: "extras", patterns: ["Internet Banking INTERNET TRANSFER (\\d+)"], filter_on_match: true }, FilterConfig { category: "gas stations", patterns: ["HOOTER'S TEMPO", "BOYLE GAS BAR", "BOYLE PAY", "PETRO-CANADA 39", "GOLD HAPPYS"], filter_on_match: true }, FilterConfig { category: "subs", patterns: ["Amazon Channels", "AMAZON", "DISNEY PLUS", "NETFLIX.COM", "MICROSOFT*TRIAL", "Spotify", "Audible"], filter_on_match: true }] }
+[[2025-11-29 08:21:14]] [Daegonica Software] <INFO> [fick] - Cat: aetolia, Reg: [Regex("IRON REALMS")]
+[[2025-11-29 08:21:14]] [Daegonica Software] <INFO> [fick] - Cat: online, Reg: [Regex("Visa Debit")]
+[[2025-11-29 08:21:14]] [Daegonica Software] <INFO> [fick] - Cat: weed, Reg: [Regex("Earth to Embers"), Regex("EARTH TO EMBERS")]
+[[2025-11-29 08:21:14]] [Daegonica Software] <INFO> [fick] - Cat: groceries, Reg: [Regex("BOYLE GROCERY")]
+[[2025-11-29 08:21:14]] [Daegonica Software] <INFO> [fick] - Cat: bills, Reg: [Regex("MCSNET"), Regex("KUBRA/EPCOR"), Regex("EPCOR"), Regex("APEXUTIL"), Regex("Internet Banking E-TRANSFER (\\d+) Bruce Clark")]
+[[2025-11-29 08:21:14]] [Daegonica Software] <INFO> [fick] - Cat: extras, Reg: [Regex("Internet Banking INTERNET TRANSFER (\\d+)")]
+[[2025-11-29 08:21:14]] [Daegonica Software] <INFO> [fick] - Cat: gas stations, Reg: [Regex("HOOTER'S TEMPO"), Regex("BOYLE GAS BAR"), Regex("BOYLE PAY"), Regex("PETRO-CANADA 39"), Regex("GOLD HAPPYS")]
+[[2025-11-29 08:21:14]] [Daegonica Software] <INFO> [fick] - Cat: subs, Reg: [Regex("Amazon Channels"), Regex("AMAZON"), Regex("DISNEY PLUS"), Regex("NETFLIX.COM"), Regex("MICROSOFT*TRIAL"), Regex("Spotify"), Regex("Audible")]
+[[2025-11-29 08:21:14]] [Daegonica Software] <INFO> [fick] - Defaults loaded!
+[[2025-11-29 08:21:14]] [Daegonica Software] <INFO> [fick] - Set regex to remove!
+[[2025-11-29 08:21:14]] [Daegonica Software] <INFO> [fick] - Full Regex patterns loaded!
+[[2025-11-29 08:22:25]] [Daegonica Software] <INFO> [fick] - Reading from: records\cibc.csv
+[[2025-11-29 08:22:25]] [Daegonica Software] <INFO> [fick] - Reader successful!
+[[2025-11-29 08:22:25]] [Daegonica Software] <INFO> [fick] - Defaults loaded!
+[[2025-11-29 08:22:25]] [Daegonica Software] <INFO> [fick] - Set regex to remove!
+[[2025-11-29 08:22:25]] [Daegonica Software] <INFO> [fick] - Full Regex patterns loaded!
+[[2025-11-29 08:23:24]] [Daegonica Software] <INFO> [fick] - Reading from: records\cibc.csv
+[[2025-11-29 08:23:24]] [Daegonica Software] <INFO> [fick] - Reader successful!
+[[2025-11-29 08:23:24]] [Daegonica Software] <INFO> [fick] - Parsing TOML!
+[[2025-11-29 08:23:24]] [Daegonica Software] <INFO> [fick] - TOML Filters Parsed!
+[[2025-11-29 08:23:24]] [Daegonica Software] <INFO> [fick] - Defaults loaded!
+[[2025-11-29 08:23:24]] [Daegonica Software] <INFO> [fick] - Set regex to remove!
+[[2025-11-29 08:23:24]] [Daegonica Software] <INFO> [fick] - Full Regex patterns loaded!

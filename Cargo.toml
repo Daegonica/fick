@@ -1,0 +1,14 @@
+[package]
+name = "fick"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+csv = "1"
+clap = { version = "4", features = ["derive"]}
+colored = "2"
+regex = "1"
+serde = { version = "1.0", features = ["derive"] }
+toml = "0.8"
+file_reader = { path = "../../toolbox/file_reader" }
+dlog = { path = "../../toolbox//dlog" }

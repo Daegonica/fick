@@ -1,0 +1,69 @@
+[[filters]]
+category = "aetolia"
+patterns = [
+    "IRON REALMS"
+]
+filter_on_match = true
+
+[[filters]]
+category = "online"
+patterns = [
+    "Visa Debit"
+]
+filter_on_match = true
+
+[[filters]]
+category = "weed"
+patterns = [
+    "Earth to Embers",
+    "EARTH TO EMBERS"
+]
+filter_on_match = true
+
+[[filters]]
+category = "groceries"
+patterns = [
+    "BOYLE GROCERY"
+]
+filter_on_match = true
+
+[[filters]]
+category = "bills"
+patterns = [
+    "MCSNET",
+    "KUBRA/EPCOR",
+    "EPCOR",
+    "APEXUTIL",
+    "Internet Banking E-TRANSFER (\\d+) Bruce Clark"
+]
+filter_on_match = true
+
+[[filters]]
+category = "extras"
+patterns = [
+    "Internet Banking INTERNET TRANSFER (\\d+)"
+]
+filter_on_match = true
+[[filters]]
+category = "gas stations"
+patterns = [
+    "HOOTER'S TEMPO",
+    "BOYLE GAS BAR",
+    "BOYLE PAY",
+    "PETRO-CANADA 39",
+    "GOLD HAPPYS"
+]
+filter_on_match = true
+
+[[filters]]
+category = "subs"
+patterns = [
+    "Amazon Channels",
+    "AMAZON",
+    "DISNEY PLUS",
+    "NETFLIX.COM",
+    "MICROSOFT*TRIAL",
+    "Spotify",
+    "Audible"
+]
+filter_on_match = true
