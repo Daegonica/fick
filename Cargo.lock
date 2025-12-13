@@ -218,6 +218,7 @@ dependencies = [
  "csv",
  "dlog",
  "file_reader",
+ "once_cell",
  "regex",
  "serde",
  "toml",
