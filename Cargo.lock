@@ -214,8 +214,6 @@ version = "0.1.0"
 dependencies = [
  "chrono",
  "clap",
- "colored",
- "csv",
  "dlog",
  "file_reader",
  "once_cell",

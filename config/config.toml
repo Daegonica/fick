@@ -1,4 +1,11 @@
 [[filters]]
+category = "paycheck"
+patterns = [
+    "Internet Banking E-TRANSFER (\\d+) RAMARK PARK MODELS LTD."
+]
+filter_on_match = true
+
+[[filters]]
 category = "aetolia"
 patterns = [
     "IRON REALMS"

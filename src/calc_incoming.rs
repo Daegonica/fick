@@ -1,17 +1,32 @@
 use crate::prelude::*;
 
-pub fn calc_amount_earned(log: &mut Logger, records: &[Record], options: &Vec<String>) {
+pub fn calc_amount_earned(log: &mut Logger, records: &[Record], options: &Vec<String>, filters: &Config) {
     log.info("Calculating totals!");
 
     let mut default_search: bool = true;
     let mut start_date: Option<NaiveDate> = None;
     let mut end_date: Option<NaiveDate> = None;
     let mut record_date: Option<NaiveDate> = None;
+    let mut string_filters: Vec<String> = Vec::new();
+    let mut regex_filters: Vec<Regex> = Vec::new();
 
-    if let Some(first) = options.get(0) {
-        if DATE_FORMAT.is_match(&first) {
-            (start_date, end_date) = set_date_range(first, log);
+    for opt in options {
+        if DATE_FORMAT.is_match(&opt) {
+            (start_date, end_date) = set_date_range(opt, log);
             default_search = false;
+        }
+
+        for filter in &filters.filters {
+            if filter.category == *opt {
+                default_search = false;
+                for pattern in &filter.patterns {
+                    if let Ok(regex) = Regex::new(pattern) {
+                        regex_filters.push(regex);
+                    } else {
+                        string_filters.push(pattern.clone());
+                    }
+                }
+            }
         }
     }
 
@@ -23,13 +38,23 @@ pub fn calc_amount_earned(log: &mut Logger, records: &[Record], options: &Vec<St
         
         if !default_search {
             // Need to add logic to handle date range, and optional categories.
-            record_date = NaiveDate::parse_from_str(&record.date, "%Y-%m-%d").ok();
-            if !(record_date >= start_date && record_date <= end_date) {
-                record_info = false;
+            if start_date != None {
+                record_date = NaiveDate::parse_from_str(&record.date, "%Y-%m-%d").ok();
+                if !(record_date >= start_date && record_date <= end_date) {
+                    record_info = false;
+                }
+            }
+
+            // Need to add in category logic
+            for regex in &regex_filters {
+                if !regex.is_match(&record.info) {
+                    record_info = false;
+                }
             }
         }
                 
-        if !ignore_info.is_match(&record.info) && record_info {
+        if !ignore_info.is_match(&record.info) && record_info && !record.money_in.is_empty() {
+            // log.info(format!("{:#?}", record.info));
             total_earned += match record.money_in.parse::<f64>() {
                 Ok(value) => {
                     (value * 100.00).round() / 100.0
