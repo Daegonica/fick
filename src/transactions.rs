@@ -1,6 +1,6 @@
 use crate::prelude::*;
 
-pub fn calc_amount_earned(log: &mut Logger, records: &[Record], options: &Vec<String>, filters: &Config) {
+pub fn calc_amount(log: &mut Logger, records: &[Record], options: &Vec<String>, filters: &Config, calc_type: String) {
     log.info("Calculating totals!");
 
     let mut default_search: bool = true;
@@ -19,7 +19,8 @@ pub fn calc_amount_earned(log: &mut Logger, records: &[Record], options: &Vec<St
             if filter.category == *opt {
                 default_search = false;
                 for pattern in &filter.patterns {
-                    if let Ok(regex) = Regex::new(pattern) {
+                    let lower_pattern = pattern.to_lowercase();
+                    if let Ok(regex) = Regex::new(&lower_pattern) {
                         regex_filters.push(regex);
                     }
                 }
@@ -27,12 +28,18 @@ pub fn calc_amount_earned(log: &mut Logger, records: &[Record], options: &Vec<St
         }
     }
 
-    let mut total_earned: f64 = 0.0;
+    let mut total: f64 = 0.0;
     let ignore_info = Regex::new(r"Internet Banking INTERNET TRANSFER \d+").unwrap();
     let mut store_info: Vec<(String, String)> = Vec::new();
 
     for record in records {
         let mut record_info: bool = true;
+        let calc_value = match calc_type.as_str() {
+            "money_in" => &record.money_in,
+            "money_out" => &record.money_out,
+            _ => ""
+        };
+        let lower_info = record.info.to_lowercase();
         
         if !default_search {
             // Need to add logic to handle date range, and optional categories.
@@ -44,17 +51,16 @@ pub fn calc_amount_earned(log: &mut Logger, records: &[Record], options: &Vec<St
             }
 
             // Need to add in category logic
-            for regex in &regex_filters {
-                if !regex.is_match(&record.info) {
-                    record_info = false;
-                }
+            let matched = regex_filters.iter().any(|re| re.is_match(&lower_info));
+            if !matched {
+                record_info = false;
             }
         }
-                
-        if !ignore_info.is_match(&record.info) && record_info && !record.money_in.is_empty() {
+        // Isn't doing the totals for some categories. Need to find out why.
+
+        if !ignore_info.is_match(&record.info) && record_info && !calc_value.is_empty() {
             store_info.push((record.info.clone(), record.date.clone()));
-            // log.info(format!("{:#?}", record.info));
-            total_earned += match record.money_in.parse::<f64>() {
+            total += match calc_value.parse::<f64>() {
                 Ok(value) => {
                     (value * 100.00).round() / 100.0
                 },
@@ -64,7 +70,7 @@ pub fn calc_amount_earned(log: &mut Logger, records: &[Record], options: &Vec<St
         }
     }
 
-    log.info(format!("Total Earned: {}", (total_earned *  100.0).round() / 100.0));
+    log.info(format!("Total: {}", (total *  100.0).round() / 100.0));
     log.info("Sources: ");
     for (info, date) in &store_info {
         log.info(format!("{} - {}", date, info));

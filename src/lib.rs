@@ -1,4 +1,4 @@
-mod calc_incoming;
+mod transactions;
 mod prelude;
 
 use std::{fs::File, io::Write};
@@ -81,7 +81,8 @@ impl FickCLI {
 
         // TODO: Add in functions of what we want to do. By date, by transaction, by amount
         match query.as_str() {
-            "total earned" => calc_incoming::calc_amount_earned(&mut self.log, &self.records, &default_option, &self.filters),
+            "total earned" => transactions::calc_amount(&mut self.log, &self.records, &default_option, &self.filters, "money_in".to_string()),
+            "total spent" => transactions::calc_amount(&mut self.log, &self.records, &default_option, &self.filters, "money_out".to_string()),
             "filters needed" => self.show_filters_to_add(),
             "show filters" => self.show_categories(),
             _ => self.log.info("Didn't pick a query!"),
