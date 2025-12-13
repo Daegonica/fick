@@ -7,7 +7,6 @@ pub fn calc_amount_earned(log: &mut Logger, records: &[Record], options: &Vec<St
     let mut start_date: Option<NaiveDate> = None;
     let mut end_date: Option<NaiveDate> = None;
     let mut record_date: Option<NaiveDate> = None;
-    let mut string_filters: Vec<String> = Vec::new();
     let mut regex_filters: Vec<Regex> = Vec::new();
 
     for opt in options {
@@ -22,8 +21,6 @@ pub fn calc_amount_earned(log: &mut Logger, records: &[Record], options: &Vec<St
                 for pattern in &filter.patterns {
                     if let Ok(regex) = Regex::new(pattern) {
                         regex_filters.push(regex);
-                    } else {
-                        string_filters.push(pattern.clone());
                     }
                 }
             }

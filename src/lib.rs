@@ -83,10 +83,20 @@ impl FickCLI {
         match query.as_str() {
             "total earned" => calc_incoming::calc_amount_earned(&mut self.log, &self.records, &default_option, &self.filters),
             "filters needed" => self.show_filters_to_add(),
+            "show filters" => self.show_categories(),
             _ => self.log.info("Didn't pick a query!"),
         }
 
         Ok(())
+    }
+
+    fn show_categories(&mut self) {
+        let mut all_cats: Vec<String> = Vec::new();
+        for filter in &self.filters.filters {
+            all_cats.push(filter.category.clone());
+        }
+
+        self.log.info(format!("{:#?}", all_cats));
     }
 
     pub fn convert_to_regex(&mut self) -> Vec<Regex> {

@@ -5,6 +5,41 @@ patterns = [
 ]
 filter_on_match = true
 
+[[filters]] 
+category = "etransfer"
+patterns = [
+    "Internet Banking E-Transfer"
+]
+filter_on_match = true
+
+[[filters]]
+category = "returns"
+patterns = [
+    "mdse return"
+]
+filter_on_match = true
+
+[[filters]] 
+category = "instore"
+patterns = [
+    "point of sale"
+]
+filter_on_match = true
+
+[[filters]]
+category = "government"
+patterns = [
+    "Electronic Funds Transfer DEPOSIT"
+]
+filter_on_match = true
+
+[[filters]]
+category = "bank fees"
+patterns = [
+    "Branch transaction"
+]
+filter_on_match = true
+
 [[filters]]
 category = "aetolia"
 patterns = [
@@ -15,16 +50,14 @@ filter_on_match = true
 [[filters]]
 category = "online"
 patterns = [
-    "Visa Debit",
-    "VISA DEBIT"
+    "Visa Debit"
 ]
 filter_on_match = true
 
 [[filters]]
 category = "weed"
 patterns = [
-    "Earth to Embers",
-    "EARTH TO EMBERS"
+    "Earth to Embers"
 ]
 filter_on_match = true
 
