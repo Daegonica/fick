@@ -42,7 +42,6 @@ fn main() {
         read_text(&String::from("Hello from Text!"));
     }
 
-    println!("{:#?}", &args);
 }
 
 fn read_text(file_path: &String) {

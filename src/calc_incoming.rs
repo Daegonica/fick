@@ -29,6 +29,7 @@ pub fn calc_amount_earned(log: &mut Logger, records: &[Record], options: &Vec<St
 
     let mut total_earned: f64 = 0.0;
     let ignore_info = Regex::new(r"Internet Banking INTERNET TRANSFER \d+").unwrap();
+    let mut store_info: Vec<(String, String)> = Vec::new();
 
     for record in records {
         let mut record_info: bool = true;
@@ -51,6 +52,7 @@ pub fn calc_amount_earned(log: &mut Logger, records: &[Record], options: &Vec<St
         }
                 
         if !ignore_info.is_match(&record.info) && record_info && !record.money_in.is_empty() {
+            store_info.push((record.info.clone(), record.date.clone()));
             // log.info(format!("{:#?}", record.info));
             total_earned += match record.money_in.parse::<f64>() {
                 Ok(value) => {
@@ -63,6 +65,10 @@ pub fn calc_amount_earned(log: &mut Logger, records: &[Record], options: &Vec<St
     }
 
     log.info(format!("Total Earned: {}", (total_earned *  100.0).round() / 100.0));
+    log.info("Sources: ");
+    for (info, date) in &store_info {
+        log.info(format!("{} - {}", date, info));
+    }
 }
 
 fn set_date_range(range: &String, log: &mut Logger) -> (Option<NaiveDate>, Option<NaiveDate>) {
