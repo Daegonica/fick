@@ -15,7 +15,8 @@ filter_on_match = true
 [[filters]]
 category = "online"
 patterns = [
-    "Visa Debit"
+    "Visa Debit",
+    "VISA DEBIT"
 ]
 filter_on_match = true
 
