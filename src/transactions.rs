@@ -72,9 +72,9 @@ pub fn calc_amount(log: &mut Logger, records: &[Record], options: &Vec<String>, 
 
     log.info(format!("Total: {}", (total *  100.0).round() / 100.0));
     log.info("Sources: ");
-    for (info, date) in &store_info {
-        log.info(format!("{} - {}", date, info));
-    }
+    // for (info, date) in &store_info {
+    //     log.info(format!("{} - {}", date, info));
+    // }
 }
 
 fn set_date_range(range: &String, log: &mut Logger) -> (Option<NaiveDate>, Option<NaiveDate>) {

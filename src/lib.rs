@@ -79,10 +79,16 @@ impl FickCLI {
         }
 
 
-        // TODO: Add in functions of what we want to do. By date, by transaction, by amount
+        // TODO: Add functions for the following
+        // * Search amounts below certain amount. Sent/received
+        // * Search amounts above certain amount. Sent/received
+        // * Search amounts within certain range of amount. Sent/received
+        // * Average amount spent on category in date range
+        //   * How should we do this one? Average of each certain type in the category? Or Average of all set by the user.
+        //   * IE, "average spent" "bills" "2025-03-23 2025-06-23" "per/all(used only on more than 1 month ranges)"
         match query.as_str() {
-            "total earned" => transactions::calc_amount(&mut self.log, &self.records, &default_option, &self.filters, "money_in".to_string()),
-            "total spent" => transactions::calc_amount(&mut self.log, &self.records, &default_option, &self.filters, "money_out".to_string()),
+            "total received" => transactions::calc_amount(&mut self.log, &self.records, &default_option, &self.filters, "money_in".to_string()),
+            "total sent" => transactions::calc_amount(&mut self.log, &self.records, &default_option, &self.filters, "money_out".to_string()),
             "filters needed" => self.show_filters_to_add(),
             "show filters" => self.show_categories(),
             _ => self.log.info("Didn't pick a query!"),
@@ -109,7 +115,6 @@ impl FickCLI {
                 let lower_pattern = pattern.to_lowercase();
                 if let Ok(regex) = Regex::new(&lower_pattern) {
                     regex_patterns.push(regex);
-                    // self.log.info("Found a Regex to match!");
                 }
             }
         }
