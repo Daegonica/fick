@@ -1,7 +1,6 @@
 mod transactions;
 mod prelude;
 
-use std::{fs::File, io::Write};
 use serde::Deserialize;
 
 // Toolbox
@@ -30,7 +29,6 @@ pub struct Record {
 pub struct Filter {
     category: String,
     patterns: Vec<String>,
-    filter_on_match: bool,
 }
 
 #[derive(Debug, Deserialize, Default)]

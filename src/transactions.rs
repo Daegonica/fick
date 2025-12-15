@@ -6,6 +6,7 @@ pub fn calc_amount(log: &mut Logger, records: &[Record], options: &Vec<String>, 
     let mut default_search: bool = true;
     let mut start_date: Option<NaiveDate> = None;
     let mut end_date: Option<NaiveDate> = None;
+    #[allow(unused)]
     let mut record_date: Option<NaiveDate> = None;
     let mut regex_filters: Vec<Regex> = Vec::new();
 

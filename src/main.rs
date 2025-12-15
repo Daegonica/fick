@@ -2,6 +2,8 @@ use clap::Parser;
 
 use fick::FickCLI;
 
+mod tui;
+
 #[derive(Parser, Debug)]
 #[command(author, version, about)]
 struct Args {
@@ -32,11 +34,7 @@ fn main() {
             fick.log.error(&format!("Error reading CSV: {}", e));
         };
     } else {
-        add_tui(&String::from("Still working on TUI!"));
+        let _ = tui::draw();
     }
 
-}
-
-fn add_tui(words: &String) {
-    println!("{}", words);
 }

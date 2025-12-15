@@ -3,11 +3,9 @@ category = "paycheck"
 patterns = [
     "direct deposit"
 ]
-filter_on_match = true
 
 [[filters]] 
 category = "etransfer"
 patterns = [
     "Internet Banking E-Transfer"
 ]
-filter_on_match = true

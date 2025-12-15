@@ -12,3 +12,6 @@ toml = "0.8"
 file_reader = { path = "../../toolbox/file_reader" }
 dlog = { path = "../../toolbox//dlog" }
 once_cell = "1.19"
+crossterm = "0.29.0"
+ratatui = "0.29.0"
+
