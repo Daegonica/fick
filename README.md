@@ -3,10 +3,12 @@
 A financial checker currently in development. The purpose of this CLI program will to to take in various financial records and parse the information into text files based on optional inputs.
 
 ## Features
+- Automatically detects file types
 - Total money sent
 - Total money received
 - Customizable Categories
 - Date range search
+- TUI powered by ratatui(Currently being worked on)
 
 ## Tech
 - Rust
@@ -16,6 +18,8 @@ A financial checker currently in development. The purpose of this CLI program wi
 Active Development
 
 ## [query]
+- "tui"
+    - For those less command-line savvy there is a TUI option.
 - "filters needed"
     - Shows a list of possible patterns not within config.toml with digits removed to make for easier copy/paste
 - "show filters"
@@ -32,4 +36,4 @@ Active Development
 
 ## How to Run.
 ```bash
-cargo run -- [optional flags: -c(csv file)] file.type [query] [options]
+cargo run -- file.type [query] [options]
