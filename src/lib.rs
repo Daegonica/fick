@@ -1,4 +1,4 @@
-mod transactions;
+mod calc;
 mod prelude;
 
 use serde::Deserialize;
@@ -85,8 +85,8 @@ impl FickCLI {
         //   * How should we do this one? Average of each certain type in the category? Or Average of all set by the user.
         //   * IE, "average spent" "bills" "2025-03-23 2025-06-23" "per/all(used only on more than 1 month ranges)"
         match query.as_str() {
-            "total received" => transactions::calc_amount(&mut self.log, &self.records, &default_option, &self.filters, "money_in".to_string()),
-            "total sent" => transactions::calc_amount(&mut self.log, &self.records, &default_option, &self.filters, "money_out".to_string()),
+            "total received" => calc::calc_amount(&mut self.log, &self.records, &default_option, &self.filters, "money_in".to_string()),
+            "total sent" => calc::calc_amount(&mut self.log, &self.records, &default_option, &self.filters, "money_out".to_string()),
             "filters needed" => self.show_filters_to_add(),
             "show filters" => self.show_categories(),
             _ => self.log.info("Didn't pick a query!"),
